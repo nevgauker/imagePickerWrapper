@@ -5,6 +5,8 @@ class ImageSaver: NSObject {
     public  var successHandler: (() -> Void)?
     public   var errorHandler: ((Error) -> Void)?
     
+    public override init(){}
+    
     public func writeToPhotoAlbum(image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
     }

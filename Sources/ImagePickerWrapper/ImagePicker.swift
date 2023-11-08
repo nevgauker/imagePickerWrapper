@@ -28,10 +28,14 @@ struct ImagePicker:UIViewControllerRepresentable{
     }
     
     @Binding var image: UIImage?
+    
+    public init(image: Binding<UIImage?>) {
+        self._image = image
+    }
 
- 
+
     typealias UIViewControllerType = PHPickerViewController
-
+    
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
         config.filter = .images
