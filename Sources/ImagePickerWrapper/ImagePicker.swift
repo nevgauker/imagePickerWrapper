@@ -2,16 +2,16 @@ import PhotosUI
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct ImagePicker:UIViewControllerRepresentable{
+public struct ImagePicker:UIViewControllerRepresentable{
     
-    class Coordinator:  NSObject, PHPickerViewControllerDelegate{
+    public class Coordinator:  NSObject, PHPickerViewControllerDelegate{
         var parent: ImagePicker
         init(_ parent: ImagePicker) {
             self.parent = parent
         }
 
         
-        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             // Tell the picker to go away
             picker.dismiss(animated: true)
             // Exit if no selection was made
@@ -27,16 +27,16 @@ struct ImagePicker:UIViewControllerRepresentable{
         
     }
     
-    @Binding var image: UIImage?
+    @Binding public var image: UIImage?
     
     public init(image: Binding<UIImage?>) {
         self._image = image
     }
 
 
-    typealias UIViewControllerType = PHPickerViewController
+    public typealias UIViewControllerType = PHPickerViewController
     
-    func makeUIViewController(context: Context) -> PHPickerViewController {
+    public func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
         config.filter = .images
         let picker = PHPickerViewController(configuration: config)
@@ -45,11 +45,11 @@ struct ImagePicker:UIViewControllerRepresentable{
     }
     
 
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
+    public func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
         
     }
     
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
