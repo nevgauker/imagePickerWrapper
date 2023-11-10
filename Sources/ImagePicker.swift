@@ -2,45 +2,23 @@
 //  File.swift
 //  
 //
-//  Created by Rotem Nevgauker on 08/11/2023.
+//  Created by Rotem Nevgauker on 10/11/2023.
 //
 
-import UIKit
 import PhotosUI
 import SwiftUI
 
-class ImageSaver: NSObject {
-    
-    public  var successHandler: (() -> Void)?
-    public   var errorHandler: ((Error) -> Void)?
-    
-    public override init(){}
-    
-    public func writeToPhotoAlbum(image: UIImage) {
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompleted), nil)
-    }
-    
-    @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            errorHandler?(error)
-        } else {
-            successHandler?()
-        }
-    }
-}
-
-
 @available(iOS 14.0, *)
- struct ImagePicker:UIViewControllerRepresentable{
+struct ImagePicker:UIViewControllerRepresentable{
     
-     class Coordinator:  NSObject, PHPickerViewControllerDelegate{
+    class Coordinator:  NSObject, PHPickerViewControllerDelegate{
         var parent: ImagePicker
         public init(_ parent: ImagePicker) {
             self.parent = parent
         }
         
         
-         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             // Tell the picker to go away
             picker.dismiss(animated: true)
             // Exit if no selection was made
@@ -63,7 +41,7 @@ class ImageSaver: NSObject {
     }
     
     
-     typealias UIViewControllerType = PHPickerViewController
+    typealias UIViewControllerType = PHPickerViewController
     
     public func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
@@ -74,13 +52,14 @@ class ImageSaver: NSObject {
     }
     
     
-     func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
         
     }
     
-     func makeCoordinator() -> Coordinator {
+    func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 }
+
 
 
