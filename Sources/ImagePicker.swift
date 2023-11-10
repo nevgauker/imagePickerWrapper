@@ -9,16 +9,16 @@ import PhotosUI
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct ImagePicker:UIViewControllerRepresentable{
+public struct ImagePicker:UIViewControllerRepresentable{
     
-    class Coordinator:  NSObject, PHPickerViewControllerDelegate{
+    public class Coordinator:  NSObject, PHPickerViewControllerDelegate{
         var parent: ImagePicker
         public init(_ parent: ImagePicker) {
             self.parent = parent
         }
         
         
-        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             // Tell the picker to go away
             picker.dismiss(animated: true)
             // Exit if no selection was made
@@ -41,7 +41,7 @@ struct ImagePicker:UIViewControllerRepresentable{
     }
     
     
-    typealias UIViewControllerType = PHPickerViewController
+   public  typealias UIViewControllerType = PHPickerViewController
     
     public func makeUIViewController(context: Context) -> PHPickerViewController {
         var config = PHPickerConfiguration()
@@ -52,11 +52,11 @@ struct ImagePicker:UIViewControllerRepresentable{
     }
     
     
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
+    public func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
         
     }
     
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 }
